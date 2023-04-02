@@ -3,7 +3,7 @@ const grpc = require("@grpc/grpc-js");
 var protoLoader = require("@grpc/proto-loader");
 
 // Define proto path 
-const PROTO_PATH = "./mahasiswa.proto"
+const PROTO_PATH = "./tes.proto"
 
 const options = {
   keepCase: true,
@@ -24,7 +24,4 @@ const client = new MahasiswaService(
   grpc.credentials.createInsecure()
 )
 
-client.getAll({}, (error, mahasiswa) => {
-  if(!error) throw error
-    console.log(mahasiswa);
-})
+module.exports = client;
