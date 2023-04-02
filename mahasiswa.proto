@@ -1,5 +1,16 @@
 syntax = "proto3";
 
+// Object 
+
+package firebase;
+
+import "google/protobuf/any.proto";
+
+message FirebaseData {
+  string key = 1;
+  google.protobuf.Any value = 2;
+}
+
 message Mahasiswa {
   string id = 1;
   string nama = 2;
@@ -7,12 +18,32 @@ message Mahasiswa {
   int64 nilai = 4;
 }
 
-message Empty {}
-
 message MahasiswaList {
   repeated Mahasiswa mahasiswa = 1;
 }
 
+message MahasiswaId {
+  string id = 1;
+}
+
+message Empty {}
+
+// Service 
+
+service FirebaseService {
+  rpc AddData(FirebaseData) returns (google.protobuf.Empty);
+}
+
 service MahasiswaService {
+  // Create 
+  rpc AddSiswa (Mahasiswa) returns (Mahasiswa) {}
+
+  rpc AddMahasiswa (Mahasiswa) returns (Mahasiswa) {}
+  // Read 
   rpc GetAll (Empty) returns (MahasiswaList) {}
+  rpc GetMahasiswa (MahasiswaId) returns (Mahasiswa) {}
+  // Update
+  rpc EditMahasiswa (Mahasiswa) returns (Mahasiswa) {}
+  // Delete
+  rpc DeleteMahasiswa (MahasiswaId) returns (Empty) {}
 }
