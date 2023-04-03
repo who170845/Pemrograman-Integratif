@@ -1,27 +1,89 @@
-// Import package 
-const grpc = require("@grpc/grpc-js");
-var protoLoader = require("@grpc/proto-loader");
+const grpc = require('@grpc/grpc-js');
+const protoLoader = require('@grpc/proto-loader');
 
-// Define proto path 
-const PROTO_PATH = "./tes.proto"
-
-const options = {
-  keepCase: true,
-  longs: String,
-  enums: String,
-  defaults: true,
-  oneofs: true,
+const PROTO_PATH = './user.proto';
+const options =
+{
+    keepCase: true,
+    longs: String,
+    enums: String,
+    defaults: true,
+    oneofs: true
 };
 
 var packageDefinition = protoLoader.loadSync(PROTO_PATH, options);
 
-// Load service 
-const MahasiswaService = grpc.loadPackageDefinition(packageDefinition).MahasiswaService;
+// const protoDescriptor = grpc.loadPackageDefinition(packageDefinition);
 
-// Define client 
-const client = new MahasiswaService(
-  "127.0.0.1:50051",
+// const UserService = protoDescriptor.UserService;
+
+const UserService = grpc.loadPackageDefinition(packageDefinition).UserService;
+
+const client = new UserService(
+  "127.0.0.1:3500",
   grpc.credentials.createInsecure()
-)
+);
 
-module.exports = client;
+// module.exports = client;
+
+function listUser() {
+    client.listUser({}, (error, response) => {
+    if (error) {
+        console.error(error);
+        return;
+    }
+    else{
+        console.log('success fetch data')
+        console.log(response)
+    }
+    //console.log(response.users);
+    });
+}
+
+function getUser(id) {
+    client.GetUser({ id }, (error, response) => {
+    if (error) {
+    console.error(error);
+    return;
+    }
+    console.log(response.user);
+    });
+}
+
+function addUser(nama, umur) {
+    const user = { nama, umur };
+    client.AddUser(user, (error, response) => {
+    if (error) {
+    console.error(error);
+    return;
+    }
+    console.log(response.user);
+    });
+}
+
+function updateUser(id, nama, umur) {
+    const user = { id, nama, umur };
+    client.UpdateUser(user, (error, response) => {
+    if (error) {
+    console.error(error);
+    return;
+    }
+    console.log(response);
+    });
+    }
+    
+    function deleteUser(id) {
+    client.DeleteUser({ id }, (error, response) => {
+    if (error) {
+    console.error(error);
+    return;
+    }
+    console.log(response);
+    });
+    }
+    
+     //listUser();
+    // getUser(2);
+    addUser('Piead', '20');
+    // updateUser(1, 'Arkan', '21');
+    // deleteUser(1);
