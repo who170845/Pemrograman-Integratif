@@ -1,7 +1,7 @@
 const grpc = require('@grpc/grpc-js');
 const protoLoader = require('@grpc/proto-loader');
 
-const PROTO_PATH = './user.proto';
+const PROTO_PATH = './penduduk.proto';
 const options =
 {
     keepCase: true,
@@ -82,8 +82,8 @@ function updateUser(id, nama, umur) {
     });
     }
     
-     //listUser();
-    // getUser(2);
-    addUser('Piead', '20');
-    // updateUser(1, 'Arkan', '21');
-    // deleteUser(1);
+     listUser();
+    // getUser(6);
+    //addUser('arkan1', '20');
+     //updateUser(7, 'Budi', '20');
+    // deleteUser(6);

@@ -2,7 +2,8 @@ const grpc = require('@grpc/grpc-js');
 const protoLoader = require('@grpc/proto-loader');
 const mysql = require('mysql');
 
-const PROTO_PATH = './user.proto';
+
+const PROTO_PATH = './penduduk.proto';
 const options =
 {
     keepCase: true,
@@ -44,12 +45,21 @@ server.addService(usersProto.UserService.service, {
             return;
           }
           const users = results
-        if (!users.length) {
-            callback({ code: grpc.status.NOT_FOUND, details: 'User not found' }, null);
+          if (!users.length) {
+            const error = {
+              code: grpc.status.NOT_FOUND,
+              details: 'User not found',
+            };
+            callback(error, null);
             return;
-        }
-    })
-    callback(null, { users });
+          }
+      
+          const userList = {
+            users: users,
+          };
+      
+          callback(null, userList);
+        })
   },  
   AddUser: (call, callback) => {
     const user = call.request;
@@ -81,7 +91,7 @@ server.addService(usersProto.UserService.service, {
   },
   UpdateUser: (call, callback) => {
     const user = call.request;
-    db.query('UPDATE data SET nama = ?, umur = ? WHERE id = ?', [user.name, user.email, user.id], (error) => {
+    db.query('UPDATE data SET nama = ?, umur = ? WHERE id = ?', [user.nama, user.umur, user.id], (error) => {
       if (error) {
         console.error(error);
         callback(error, null);
