@@ -23,11 +23,11 @@ Kemudian `npm install` untuk menginstall module yang diperlukan untuk menjalanka
 
 - Setelah server dijalankan, baru program bisa bisa dijalankan dengan perintah `node client.js`.
 - Program untuk grpc ini mencakup fungsi:
-    > listUser();
-    > getUser(id);
-    > addUser('nama', 'umur');
-    > updateUser(id, 'nama', 'umur');
-    > deleteUser(id);
+    - listUser();
+    - getUser(id);
+    - addUser('nama', 'umur');
+    - updateUser(id, 'nama', 'umur');
+    - deleteUser(id);
 
 - Misal kita ingin menambahkan user, maka dalam fungsi `addUser` kita masukkan nama dan umur user yang ingin kita tambahkan. Contoh `addUser('Anda', '40');` saya menambahn user bernama `Anda` berumur 40 tahun. Kemudian jalankan di terminal `node client.js`.
 
