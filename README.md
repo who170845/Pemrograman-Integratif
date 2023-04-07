@@ -8,7 +8,7 @@
 
 Kemudian `npm install` untuk menginstall module yang diperlukan untuk menjalankan program.
 - `npm install grpc` untuk menginstall grpc yang diperlukan oleh program.
-- `npm install protobuf` supaya file .proto dapat dijalankan.
+- `npm install protobuf` supaya file `.proto` dapat dijalankan.
 - `npm install mysql` supaya dapat terkonfigurasi dengan data base mysql.
 
 # Dokumentasi
@@ -39,5 +39,5 @@ Kemudian `npm install` untuk menginstall module yang diperlukan untuk menjalanka
 
 - Demikian juga untuk fungsi yang lain.
 
-# Terima Kasih :-)
+# Terima Kasih `:-)`
 
